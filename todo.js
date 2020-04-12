@@ -4,13 +4,23 @@ const toDoList = document.querySelector(".js-toDoList");
 
 const TODOS_LS = 'toDos';
 
-const toDos = []; // toDoObj 를 담을 배열
+let toDos = []; // toDoObj 를 담을 배열
 
 function deleteToDo(){
     const btn = event.target;
     const li = btn.parentNode;
     toDoList.removeChild(li);
-    const cleanToDos = toDos.filter
+    
+    const cleanToDos = toDos.filter(function(toDos_item){
+        //console.log(toDos_item, li);
+        return toDos_item.id !== parseInt(li.id);
+        // toDos_item : toDos array 에 있는 item들 (toDoObj)
+        // li : 삭제 버튼을 누른 li 항목
+        // 삭제 버튼을 누른 li 항목을 제외한 나머지 항목들만 cleanToDos 배열에 저장한다.
+    });
+    
+    toDos = cleanToDos; // toDos 를 cleanToDos 로 최신화
+    saveToDos(); 
 }
 
 function saveToDos(){
