@@ -11,6 +11,7 @@ function deleteToDo(){
     const li = btn.parentNode;
     toDoList.removeChild(li);
     
+    
     const cleanToDos = toDos.filter(function(toDos_item){
         //console.log(toDos_item, li);
         return toDos_item.id !== parseInt(li.id);
@@ -18,6 +19,19 @@ function deleteToDo(){
         // li : 삭제 버튼을 누른 li 항목
         // 삭제 버튼을 누른 li 항목을 제외한 나머지 항목들만 cleanToDos 배열에 저장한다.
     });
+    
+
+    /* for문으로 작성하려면 이 방식으로 해야함
+    const cleanToDos = [];
+
+    for(let i=0; i<toDos.length; i++){
+        if(toDos[i].id !== parseInt(li.id)){
+            cleanToDos.push(toDos[i]);
+        }
+    }
+    */
+        
+    
     
     toDos = cleanToDos; // toDos 를 cleanToDos 로 최신화
     saveToDos(); 
@@ -66,7 +80,7 @@ function loadToDos(){
         //console.log(loadedToDos); 
         const parsedToDos = JSON.parse(loadedToDos);
        // console.log(parsedToDos); 객체로 다룰 수 있음
-
+        console.dir(parsedToDos);
        
        parsedToDos.forEach(function(toDo_item){ // toDo_item : parsedToDos 배열 각각의 요소
            paintToDo(toDo_item.text);
@@ -77,7 +91,7 @@ function loadToDos(){
 
        parsedToDos.forEach(something);
 
-       function something(toDo){
+       function something(toDo_item){
            paintToDo(toDo_item.text);
        }
 
